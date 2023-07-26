@@ -49,7 +49,7 @@ static bool buf_grow(struct strbuf *buf, size_t newsize)
 	return true;
 }
 
-void strbuf_init(struct strbuf *buf)
+void kmod_strbuf_init(struct strbuf *buf)
 {
 	buf->bytes = NULL;
 	buf->size = 0;
