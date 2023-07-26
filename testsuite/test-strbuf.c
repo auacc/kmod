@@ -36,7 +36,7 @@ static int test_strbuf_pushchar(const struct test *t)
 	char *result1, *result2;
 	const char *c;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 
 	for (c = TEXT; *c != '\0'; c++)
 		strbuf_pushchar(&buf, *c);
@@ -64,7 +64,7 @@ static int test_strbuf_pushchars(const struct test *t)
 	const char *c;
 	int lastwordlen = 0;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 	str = strdup(TEXT);
 	for (c = strtok_r(str, " ", &saveptr); c != NULL;
 	     c = strtok_r(NULL, " ", &saveptr)) {

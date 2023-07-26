@@ -11,7 +11,7 @@ struct strbuf {
 	unsigned used;
 };
 
-void strbuf_init(struct strbuf *buf);
+void kmod_strbuf_init(struct strbuf *buf);
 void strbuf_release(struct strbuf *buf);
 void strbuf_clear(struct strbuf *buf);
 

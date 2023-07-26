@@ -247,7 +247,7 @@ static struct index_node_f *index_read(FILE *in, uint32_t offset)
 
 	if (offset & INDEX_NODE_PREFIX) {
 		struct strbuf buf;
-		strbuf_init(&buf);
+		kmod_strbuf_init(&buf);
 		buf_freadchars(&buf, in);
 		prefix = strbuf_steal(&buf);
 	} else
@@ -281,7 +281,7 @@ static struct index_node_f *index_read(FILE *in, uint32_t offset)
 
 		value_count = read_long(in);
 
-		strbuf_init(&buf);
+		kmod_strbuf_init(&buf);
 		while (value_count--) {
 			priority = read_long(in);
 			buf_freadchars(&buf, in);
@@ -401,7 +401,7 @@ void index_dump(struct index_file *in, int fd, const char *prefix)
 	if (root == NULL)
 		return;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 	strbuf_pushchars(&buf, prefix);
 	index_dump_node(root, &buf, fd);
 	strbuf_release(&buf);
@@ -593,7 +593,7 @@ struct index_value *index_searchwild(struct index_file *in, const char *key)
 	struct strbuf buf;
 	struct index_value *out = NULL;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 	index_searchwild__node(root, &buf, key, 0, &out);
 	strbuf_release(&buf);
 	return out;
@@ -882,7 +882,7 @@ void index_mm_dump(struct index_mm *idx, int fd, const char *prefix)
 	if (root == NULL)
 		return;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 	strbuf_pushchars(&buf, prefix);
 	index_mm_dump_node(root, &buf, fd);
 	strbuf_release(&buf);
@@ -1075,7 +1075,7 @@ struct index_value *index_mm_searchwild(struct index_mm *idx, const char *key)
 	struct strbuf buf;
 	struct index_value *out = NULL;
 
-	strbuf_init(&buf);
+	kmod_strbuf_init(&buf);
 	index_mm_searchwild_node(root, &buf, key, 0, &out);
 	strbuf_release(&buf);
 	return out;
