@@ -2359,6 +2359,32 @@ list_error:
 	return NULL;
 }
 
+KMOD_EXPORT int kmod_module_get_siginfo(const struct kmod_module *mod, struct kmod_signature_info *siginfo)
+{
+	struct kmod_elf *elf;
+
+	if (mod == NULL || siginfo == NULL)
+		return -ENOENT;
+
+	elf = kmod_module_get_elf(mod);
+	if (elf == NULL)
+		return -errno;
+
+	if (mod->file == NULL)
+		return -EINVAL;
+
+	if (!kmod_module_signature_info(mod->file, siginfo))
+		return -ENODATA;
+
+	return 0;
+}
+
+KMOD_EXPORT void kmod_module_free_siginfo(struct kmod_signature_info *siginfo)
+{
+	if (siginfo)
+		kmod_module_signature_info_free(siginfo);
+}
+
 /**
  * kmod_module_get_info:
  * @mod: kmod module
