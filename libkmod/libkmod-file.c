@@ -498,7 +498,7 @@ error:
 /*
  *  Callers should just check file->memory got updated
  */
-void kmod_file_load_contents(struct kmod_file *file)
+KMOD_EXPORT void kmod_file_load_contents(struct kmod_file *file)
 {
 	if (file->memory)
 		return;
@@ -507,22 +507,22 @@ void kmod_file_load_contents(struct kmod_file *file)
 	file->ops->load(file);
 }
 
-void *kmod_file_get_contents(const struct kmod_file *file)
+KMOD_EXPORT void *kmod_file_get_contents(const struct kmod_file *file)
 {
 	return file->memory;
 }
 
-off_t kmod_file_get_size(const struct kmod_file *file)
+KMOD_EXPORT off_t kmod_file_get_size(const struct kmod_file *file)
 {
 	return file->size;
 }
 
-enum kmod_file_compression_type kmod_file_get_compression(const struct kmod_file *file)
+KMOD_EXPORT enum kmod_file_compression_type kmod_file_get_compression(const struct kmod_file *file)
 {
 	return file->compression;
 }
 
-int kmod_file_get_fd(const struct kmod_file *file)
+KMOD_EXPORT int kmod_file_get_fd(const struct kmod_file *file)
 {
 	return file->fd;
 }

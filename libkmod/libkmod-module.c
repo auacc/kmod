@@ -817,6 +817,26 @@ KMOD_EXPORT const char *kmod_module_get_path(const struct kmod_module *mod)
 	return mod->path;
 }
 
+KMOD_EXPORT struct kmod_file *kmod_module_get_file(const struct kmod_module *mod)
+{
+	if (mod == NULL)
+		return NULL;
+
+	if (mod->file == NULL && !kmod_module_is_builtin((struct kmod_module *)mod)) {
+		const char *path = kmod_module_get_path(mod);
+
+		if (path == NULL)
+			return NULL;
+
+		((struct kmod_module *)mod)->file = kmod_file_open(mod->ctx, path);
+	}
+
+	if (mod->file)
+		kmod_file_load_contents(mod->file);
+
+	return mod->file;
+}
+
 
 extern long delete_module(const char *name, unsigned int flags);
 
