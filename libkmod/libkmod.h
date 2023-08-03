@@ -206,6 +206,23 @@ int kmod_module_apply_filter(const struct kmod_ctx *ctx,
 
 
 
+enum kmod_file_compression_type {
+	KMOD_FILE_COMPRESSION_NONE = 0,
+	KMOD_FILE_COMPRESSION_ZSTD,
+	KMOD_FILE_COMPRESSION_XZ,
+	KMOD_FILE_COMPRESSION_ZLIB,
+};
+
+struct kmod_file;
+struct kmod_file *kmod_module_get_file(const struct kmod_module *mod);
+void kmod_file_load_contents(struct kmod_file *file);
+void *kmod_file_get_contents(const struct kmod_file *file);
+off_t kmod_file_get_size(const struct kmod_file *file);
+enum kmod_file_compression_type kmod_file_get_compression(const struct kmod_file *file);
+int kmod_file_get_fd(const struct kmod_file *file);
+
+
+
 /*
  * Information regarding "live information" from module's state, as returned
  * by kernel
